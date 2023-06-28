@@ -1,13 +1,31 @@
 import React from 'react'
 import { useRouter } from 'expo-router'
 import { ScrollView } from 'react-native'
-import { Button, Card, TextInput, useTheme } from 'react-native-paper'
+import { Button, Card, useTheme } from 'react-native-paper'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import {
+  PersonalInfo,
+  PersonalInfoSchema,
+} from '../../src/schema/checkout.schema'
+import ControlledInput from '../../src/components/ControlledInput'
 
 export default function PersonalDetails() {
   const router = useRouter()
   const theme = useTheme()
 
-  const nextPage = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PersonalInfo>({
+    resolver: zodResolver(PersonalInfoSchema),
+  })
+
+  const nextPage = data => {
+    console.log(data)
+
     router.push('/checkout/delivery')
   }
 
@@ -24,20 +42,23 @@ export default function PersonalDetails() {
       <Card style={{ backgroundColor: theme.colors.background }}>
         <Card.Title title="Personal information" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 10 }}>
-          <TextInput
+          <ControlledInput
+            control={control}
+            name="name"
             placeholder="Name"
             label="Name"
-            style={{ backgroundColor: theme.colors.background }}
           />
-          <TextInput
+
+          <ControlledInput
+            control={control}
+            name="email"
             placeholder="hey@gmail.com"
             label="Email"
-            style={{ backgroundColor: theme.colors.background }}
           />
         </Card.Content>
       </Card>
 
-      <Button onPress={nextPage} mode="contained">
+      <Button onPress={handleSubmit(nextPage)} mode="contained">
         Next
       </Button>
     </ScrollView>
