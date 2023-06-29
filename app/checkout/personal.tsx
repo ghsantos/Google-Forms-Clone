@@ -10,21 +10,20 @@ import {
   PersonalInfoSchema,
 } from '../../src/schema/checkout.schema'
 import ControlledInput from '../../src/components/ControlledInput'
+import { useCheckoutContext } from '../../src/context/CheckoutContext'
 
 export default function PersonalDetails() {
   const router = useRouter()
   const theme = useTheme()
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<PersonalInfo>({
+  const { setPersonal } = useCheckoutContext()
+
+  const { control, handleSubmit } = useForm<PersonalInfo>({
     resolver: zodResolver(PersonalInfoSchema),
   })
 
-  const nextPage = data => {
-    console.log(data)
+  const nextPage = (data: PersonalInfo) => {
+    setPersonal(data)
 
     router.push('/checkout/delivery')
   }
