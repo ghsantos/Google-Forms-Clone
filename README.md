@@ -1,14 +1,9 @@
-# Expo Router Example
+# Google Forms Clone
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
-
-## 🚀 How to use
+A clone of Google Forms made using React Native with complex form validation using Zod and react-native-mask-text
+## How to run
 
 ```sh
-npx create-expo-app -e with-router
+npm install
+npm run start
 ```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
