@@ -9,7 +9,7 @@ import {
   PaymentInfo,
   PaymentInfoSchema,
 } from '../../src/schema/checkout.schema'
-import ControlledInput from '../../src/components/ControlledInput'
+import { MaskedControlledInput } from '../../src/components/ControlledInput'
 import { useCheckoutContext } from '../../src/context/CheckoutContext'
 
 export default function PaymentDetails() {
@@ -49,23 +49,29 @@ export default function PaymentDetails() {
       <Card style={{ backgroundColor: theme.colors.background }}>
         <Card.Title title="Payment details" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 10 }}>
-          <ControlledInput
+          <MaskedControlledInput
             control={control}
             name="number"
-            placeholder="4242 4242 4242 4242"
+            placeholder="0000 0000 0000 0000"
             label="Card number"
+            mask="9999 9999 9999 9999"
+            keyboardType="numeric"
           />
-          <ControlledInput
+          <MaskedControlledInput
             control={control}
             name="expirationDate"
-            placeholder="mm/yyyy"
+            placeholder="mm/yy"
             label="Expiration date"
+            mask="99/99"
+            keyboardType="numeric"
           />
-          <ControlledInput
+          <MaskedControlledInput
             control={control}
             name="securityCode"
-            placeholder="Security code"
+            placeholder="000"
             label="Security code"
+            mask="999"
+            keyboardType="numeric"
           />
 
           <Controller

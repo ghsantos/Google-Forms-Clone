@@ -51,8 +51,10 @@ export default function PersonalDetails() {
           <ControlledInput
             control={control}
             name="email"
-            placeholder="hey@gmail.com"
+            placeholder="email@email.com"
             label="Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
         </Card.Content>
       </Card>
